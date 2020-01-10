@@ -3,10 +3,10 @@ package com.rnett.exposedgson.database
 import com.google.gson.annotations.JsonAdapter
 import com.rnett.exposedgson.ExposedGSON
 import com.rnett.exposedgson.ExposedTypeAdapter
-import org.jetbrains.exposed.dao.EntityID
 import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
-import org.jetbrains.exposed.dao.IntIdTable
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.IntIdTable
 
 object employees : IntIdTable("employees", "id") {
 
@@ -14,7 +14,7 @@ object employees : IntIdTable("employees", "id") {
 
     val idCol = integer("id").primaryKey().autoIncrement()
     val email = varchar("email", 100).uniqueIndex()
-    val dateAdded = datetime("dateadded")
+//    val dateAdded = datetime("dateadded")
 }
 
 @JsonAdapter(ExposedTypeAdapter::class)
@@ -30,7 +30,7 @@ class employee(id: EntityID<Int>) : IntEntity(id) {
     @ExposedGSON.UseAsID
     val idCol by employees.idCol
     var email by employees.email
-    var dateAdded by employees.dateAdded
+//    var dateAdded by employees.dateAdded
 
 
     // Helper Methods
